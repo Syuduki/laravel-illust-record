@@ -13,19 +13,30 @@ return [
     |
     | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
     |
+    |
+    | フロントエンドのaxiosヘッダー情報と一致するように
+    | 【備忘録】
+    |  設定はしたのに、CORSになる。原因は以下
+    | 　・レスポンスデータを返していない
+    | 　・フロントエンドのヘッダー情報とcors.phpの設定値に差異がある。（←　今回の敗因。フロント側でcontents-typeの設定をしていて、バックエンド側で設定をしていなかった）
+    | 　・フロントエンド側で、withCredentials: trueと'X-Requested-With': 'XMLHttpRequest'が無い
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'web/*'],
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => ['GET', 'POST', 'PUT'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['http://localhost:3000/'],
 
-    'allowed_origins_patterns' => [],
+    'allowed-credentials' => true,
 
-    'allowed_headers' => ['*'],
+    'allowed_origins_patterns' => ['*'],
+
+    'allowed_headers' => ['X-Requested-With, Origin, X-Csrftoken, Content-Type, Accept'],
 
     'exposed_headers' => [],
+
+    'content-type' => ['application/json'],
 
     'max_age' => 0,
 
