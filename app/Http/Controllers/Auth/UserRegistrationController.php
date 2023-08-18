@@ -20,10 +20,9 @@ class UserRegistrationController extends Controller
             DB::beginTransaction();
             $userParam = $request->only([
                 'name',
-                'login_id',
+                'loginId',
                 'email',
                 'password',
-                'icon_pass',
             ]);
             $usecase($userParam);
             DB::commit();

@@ -16,11 +16,10 @@ class UserRegistrationUsecase
     {
         $user = new User;
         $user->fill([
-            'id'=> 12345,
-            'name' => $request->name,
-            'login_id' => $request->login_id,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $request["name"],
+            'login_id' => $request["loginId"],
+            'email' => $request["email"],
+            'password' => Hash::make($request["password"]),
             'icon_path' => "",
         ]);
          return $user->save();

@@ -31,8 +31,8 @@ class UserRegistrationRequest extends FormRequest
     {
         return [
             "name" => ['required', 'string', Rule::unique('App\Models\User')],
-            "login_id" => ['required', 'string', 'max:20', Rule::unique('App\Models\User')],
-            "password" => ['required', 'string', 'confirmed'],
+            "loginId" => ['required', 'string', 'max:20', Rule::unique('App\Models\User', 'login_id')],
+            "password" => ['required', 'string', 'min:7'],
             'email' => ['required', 'email', Rule::unique('App\Models\User')],
         ];
     }
@@ -42,8 +42,8 @@ class UserRegistrationRequest extends FormRequest
         return [
             'name.required' => 'ユーザー名を入力してください。',
             'name.unique' => '入力されたユーザー名はすでに使用されています。',
-            'login_id.required' => 'ログインIDを入力してください。',
-            'login_id.unique' => '入力されたログインIDはすでに使用されています。',
+            'loginId.required' => 'ログインIDを入力してください。',
+            'loginId.unique' => '入力されたログインIDはすでに使用されています。',
             'password.required' => 'ログインIDを入力してください。',
             'email.required' => 'メールアドレスを入力してください。',
             'email.email' => 'メールアドレスの書式を確認してください。',
